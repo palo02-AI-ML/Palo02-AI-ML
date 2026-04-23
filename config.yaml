@@ -5,10 +5,12 @@ dataset:
   image_size: 224
 
 backbone:
-  name: wide_resnet50_2
+  # 'gabor'          → Gabor filter bank, no pretrained weights needed (great for textures)
+  # 'wide_resnet50_2' → pretrained CNN (better for diverse real datasets)
+  name: gabor
   layers:
-    - layer2
-    - layer3
+    - fine
+    - coarse
 
 patchcore:
   patch_size: 3          # neighborhood aggregation kernel
