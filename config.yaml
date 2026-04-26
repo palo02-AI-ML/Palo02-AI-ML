@@ -1,0 +1,27 @@
+dataset:
+  name: mvtec
+  category: carpet
+  data_path: ./data/mvtec
+  image_size: 224
+
+backbone:
+  # 'gabor'          → Gabor filter bank, no pretrained weights needed (great for textures)
+  # 'wide_resnet50_2' → pretrained CNN (better for diverse real datasets)
+  name: gabor
+  layers:
+    - fine
+    - coarse
+
+patchcore:
+  patch_size: 3          # neighborhood aggregation kernel
+  coreset_ratio: 0.01    # fraction of patches to keep in memory bank
+  max_candidates: 50000  # cap for greedy coreset pre-sampling
+
+training:
+  batch_size: 32
+  num_workers: 4
+  device: auto           # auto | cpu | cuda | mps
+
+output:
+  memory_bank_path: ./outputs/memory_bank.pt
+  results_path: ./outputs/results
